@@ -20,6 +20,7 @@ module.exports = {
     extend: {},
   },
   plugins: [
+    require('tailwindcss-debug-screens'),
     require('tailwindcss-animatecss')({
       classes: ['animate__animated', 'animate__fadeIn', 'animate__bounceIn', 'animate__lightSpeedOut'],
       settings: {
