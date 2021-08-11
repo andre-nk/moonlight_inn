@@ -45,6 +45,16 @@ export default function Home() {
           <Carousel/>
         </div>
       </div>
+      <div className="min-w-full flex bg-primary justify-center" data-aos="fade-up">
+        <div className="py-8 flex-column">
+          <div className="flex justify-center">
+            <Image src="/chest.png" height="180px" width="142px"></Image>
+          </div>
+          <h2 className="font-header text-3xl font-semibold mt-8 mb-4 text-center">Support Us!</h2>
+          <p className="font-body text-md mb-2 text-center mx-64 leading-8"><strong>Moonlight Inn</strong> is a passionate Indonesia-based D&D community that offers a vast amount of <strong>free and definitely epic</strong> D&D resources such as extended campaign from the WoTC resource, homebrew adventures, and even more homebrew classes, monsters, etc. Some little donations would be a <strong>perfect roll-20</strong> for growing this community, keeping up this server and in the end, keeping us to sharing exclusive resources for free. Nevertheless, supporting this community by <strong>simply use our resources and connect with us below</strong> is definitely a hit.</p>
+          <a className="flex justify-center py-6" href="https://www.buymeacoffee.com/fullstackdre" target="_blank"><Image height="57.5px" width="207px" src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee"/></a>
+        </div>
+      </div>
     </div>
   )
 }
