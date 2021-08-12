@@ -4,6 +4,9 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      backgroundImage: theme => ({
+        'email': "url('https://i.ibb.co/bFCZqwv/wallpaper.png')"
+      }),
       colors: {
         'primary': '#FFFCF1',
         'secondary': '#BB0F0E',
