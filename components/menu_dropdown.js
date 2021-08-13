@@ -1,7 +1,8 @@
 import { Menu, Transition } from '@headlessui/react'
 import { Fragment, useEffect, useState } from 'react'
 import { FiMenu } from 'react-icons/fi';
-import { useRouter } from 'next/router'
+import { Router, useRouter } from 'next/router'
+import Link from 'next/dist/client/link';
 
 export default function MenuDropdown() {
 
@@ -14,7 +15,7 @@ export default function MenuDropdown() {
     } 
   });
 
-  console.log(isCurrentRoute);
+  console.log(isCurrentRoute === '/resources');
 
   return (
     <div className="text-right flex">
@@ -42,7 +43,7 @@ export default function MenuDropdown() {
                       active ? 'bg-violet-500 text-white' : 'text-gray-900'
                     } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
                   >
-                    <p className={isCurrentRoute === '/' ? `text-md font-semibold font-body` : `text-md font-body`}>Home</p>
+                    <Link href="/"><p className={isCurrentRoute === '/' ? `text-md font-semibold font-body` : `text-md font-body`}>Home</p></Link>
                   </button>
                 )}
               </Menu.Item>
@@ -54,7 +55,7 @@ export default function MenuDropdown() {
                       active ? 'bg-violet-500 text-white' : 'text-gray-900'
                     } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
                   >
-                    <p className={isCurrentRoute === '/collections' ? `text-md font-semibold font-body` : `text-md font-body`}>Collections</p>
+                    <Link href="/resources"><p className={isCurrentRoute === '/resources' ? `text-md font-semibold font-body` : `text-md font-body`}>Resources</p></Link>
                   </button>
                 )}
               </Menu.Item>
@@ -66,7 +67,7 @@ export default function MenuDropdown() {
                       active ? 'bg-violet-500 text-white' : 'text-gray-900'
                     } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
                   >
-                    <p className={isCurrentRoute === '/support'  ? `text-md font-semibold font-body` : `text-md font-body`}>Support us</p>
+                    <Link href="/support"><p className={isCurrentRoute === '/support'  ? `text-md font-semibold font-body` : `text-md font-body`}>Support us</p></Link>
                   </button>
                 )}
               </Menu.Item>

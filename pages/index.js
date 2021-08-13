@@ -1,8 +1,28 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import Carousel from '../components/carousel';
+import { createClient } from 'contentful';
 
-export default function Home() {
+export async function getStaticProps(){
+  const client = createClient({
+    space: process.env.CONTENTFUL_SPACE_ID,
+    accessToken: process.env.CONTENTFUL_ACCESS_KEY
+  });
+
+  const res = await client.getEntries({
+    content_type: 'resources'
+  });
+
+  return {
+    props: {
+      resources: res.items
+    }
+  }
+} 
+
+export default function Home({ resources }) {
+
+  console.log(resources);
 
   const images = [
     "https://images.unsplash.com/photo-1516655855035-d5215bcb5604?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1200&q=60",
@@ -34,13 +54,13 @@ export default function Home() {
           <Image src="/landing.png" height="702px" width="600px" className="absolute mr-20 z-0 animate__fadeIn"></Image>
         </div>
       </div>
-      <div className="px-8 py-0 top-0 -m-1 min-w-full bg-primary relative lg:py-10">
+      <div className="top-0 -m-1 min-w-full bg-primary relative lg:py-10">
         <div className="min-w-full mt-4 mb-10 flex justify-center lg:justify-start lg:hidden">
             <button className="bg-secondary hover:bg-red-800 text-white mt-6 font-semibold py-3.5 px-6 rounded shadow font-body">
               Discover 100+ resources
             </button>
           </div>
-        <h2 className="text-2xl px-10 pt-10 pb-0 lg:pt-0 font-header font-semibold">Featured Resources</h2>
+        <h2 className="text-2xl px-12 pt-16 lg:pt-0 font-header font-semibold">Featured Resources</h2>
         <div>
           <Carousel/>
         </div>
@@ -51,20 +71,20 @@ export default function Home() {
             <Image src="/chest.png" height="180px" width="142px"></Image>
           </div>
           <h2 className="font-header text-3xl font-semibold mt-8 mb-4 text-center">Support Us!</h2>
-          <p className="font-body text-md mb-2 text-center mx-64 leading-8"><strong>Moonlight Inn</strong> is a passionate Indonesia-based D&D community that offers a vast amount of <strong>free and definitely epic</strong> D&D resources such as extended campaign from the WoTC resource, homebrew adventures, and even more homebrew classes, monsters, etc. Some little donations would be a <strong>perfect roll-20</strong> for growing this community, keeping up this server and in the end, keeping us to sharing exclusive resources for free. Nevertheless, supporting this community by <strong>simply use our resources and connect with us below</strong> is definitely a hit.</p>
+          <p className="font-body text-md mb-2 text-center mx-14 lg:mx-64 leading-8"><strong>Moonlight Inn</strong> is a passionate Indonesia-based D&D community that offers a vast amount of <strong>free and definitely epic</strong> D&D resources such as extended campaign from the WoTC resource, homebrew adventures, and even more homebrew classes, monsters, etc. Some little donations would be a <strong>perfect roll-20</strong> for growing this community, keeping up this server and in the end, keeping us to sharing exclusive resources for free. Nevertheless, supporting this community by <strong>simply use our resources and connect with us below</strong> is definitely a hit.</p>
           <a className="flex justify-center py-6" href="https://www.buymeacoffee.com/fullstackdre" target="_blank"><Image height="57.5px" width="207px" src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee"/></a>
         </div>
       </div>
       <div className="w-full h-96 bg-email bg-no-repeat bg-cover flex justify-start items-center">
-        <div className="bg-primary w-1/2 h-80 my-8 pl-16 relative z-0 flex items-center">
+        <div className="bg-primary w-full h-80 my-8 flex z-0 justify-center items-center lg:w-1/2 lg:relative">
           <div className="flex-column justify-center">
             <p className="text-2xl font-semibold font-heading pl-1">Subscribe to our newsletter!</p>
             <p className="text-md font-body pt-3 pb-5 leading-6 pl-1">Get updated for our <strong>brand-new D&D resource releases,</strong> <br/>and community updates right into your e-mail inbox</p>
             <div className="flex">
-              <input class="bg-white appearance-none border-2 border-gray-100 w-full my-2 py-4 px-4 font-body text-gray-700 leading-tight focus:outline-none focus:border-secondary" id="inline-full-name" type="text" placeholder="Enter your e-mail address here..."></input>
+              <input className="bg-white appearance-none border-2 border-gray-100 w-full my-2 py-4 px-4 font-body text-gray-700 leading-tight focus:outline-none focus:border-secondary" id="inline-full-name" type="text" placeholder="Enter your e-mail address here..."></input>
             </div>
-            <div className="min-w-full hidden justify-center lg:justify-start lg:flex">
-              <button className="bg-secondary hover:bg-red-800 text-white mt-4 font-semibold py-2.5 px-4 text-sm rounded shadow font-body">
+            <div className="min-w-full flex justify-center lg:justify-start">
+              <button className="bg-secondary hover:bg-red-800 text-white mt-4 font-semibold py-2.5 px-8 lg:px-4 text-sm rounded shadow font-body">
                 Subscribe
               </button>
             </div>

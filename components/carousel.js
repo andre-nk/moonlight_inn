@@ -75,14 +75,14 @@ const Carousel = () => {
   );
 
   return (
-    <div className="p-12 inline-flex justify-center w-screen items-center ">
+    <div className="px-12 pt-8 pb-20 inline-flex justify-center w-screen items-center ">
       <div className="relative w-full">
         <div className="carousel">
           {sliderControl(true)}
           {images.map((img, i) => (
             <div className="flex-shrink-0 w-full self-center px-0 lg:px-36" key={img} ref={refs[i]}>
               <span className="flex justify-center align-center lg:justify-start">
-                <img src={img} className="w-64 lg:pl-18" />  
+                <img src={img} className="w-64" />  
                 <div className="hidden pl-0 lg:flex">
                     <div className="flex-column justify-center align-middle max-w-3xl pl-20">
                         <h2 className="text-2xl text-black font-semibold font-header pb-4">Waterdeep: The Long Trolltide</h2>
