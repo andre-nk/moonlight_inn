@@ -1,46 +1,31 @@
 import { useState, createRef } from "react";
-import {BsChevronRight, BsChevronLeft} from 'react-icons/bs'
+import Link from "next/link";
+import Image from "next/image";
+import { BsChevronRight, BsChevronLeft } from "react-icons/bs";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
-// images must be an array of urls , if using Next JS this could something like
-const images = ['/item-1.png', '/item-2.jpg', '/item-3.jpg', '/item-4.png']
-// images must be an array of urls , if using Next JS this could something like
-// const images = ['/img/img1.png', '/img/img2.png', '/img/img3.png']
-
-
-const Carousel = () => {
-  // We will start by storing the index of the current image in the state.
+const Carousel = ({ resources }) => {
   const [currentImage, setCurrentImage] = useState(0);
 
-  // We are using react ref to 'tag' each of the images. Below will create an array of
-  // objects with numbered keys. We will use those numbers (i) later to access a ref of a
-  // specific image in this array.
-  const refs = images.reduce((acc, val, i) => {
+  const refs = resources.reduce((acc, val, i) => {
     acc[i] = createRef();
     return acc;
   }, {});
 
-  const scrollToImage = i => {
-    // First let's set the index of the image we want to see next
+  const scrollToImage = (i) => {
     setCurrentImage(i);
-    // Now, this is where the magic happens. We 'tagged' each one of the images with a ref,
-    // we can then use built-in scrollIntoView API to do eaxactly what it says on the box - scroll it into
-    // your current view! To do so we pass an index of the image, which is then use to identify our current
-    // image's ref in 'refs' array above.
+
     refs[i].current.scrollIntoView({
-      //     Defines the transition animation.
-      behavior: 'smooth',
-      //      Defines vertical alignment.
-      block: 'nearest',
-      //      Defines horizontal alignment.
-      inline: 'start',
+      behavior: "smooth",
+
+      block: "nearest",
+
+      inline: "start",
     });
   };
 
-  // Some validation for checking the array length could be added if needed
-  const totalImages = images.length;
+  const totalImages = resources.length;
 
-  // Below functions will assure that after last image we'll scroll back to the start,
-  // or another way round - first to last in previousImage method.
   const nextImage = () => {
     if (currentImage >= totalImages - 1) {
       scrollToImage(0);
@@ -57,47 +42,74 @@ const Carousel = () => {
     }
   };
 
-  // Tailwind styles. Most importantly notice position absolute, this will sit relative to the carousel's outer div.
-  const arrowStyle =
-    'absolute text-2xl z-10 h-10 w-10 flex items-center justify-center';
+  const arrowStyle = "absolute text-2xl z-10 h-10 w-10 flex items-center justify-center";
 
-  const sliderControl = isLeft => (
+  const sliderControl = (isLeft) => (
     <button
       type="button"
       onClick={isLeft ? previousImage : nextImage}
-      className={`${arrowStyle} ${isLeft ? 'left-2' : 'right-2'}`}
-      style={{ top: '40%' }}
+      className={`${arrowStyle} ${isLeft ? "left-2" : "right-2"}`}
     >
-      <span role="img" aria-label={`Arrow ${isLeft ? 'left' : 'right'}`}>
-        {isLeft ? <BsChevronLeft style={{color: "black"}}/> : <BsChevronRight/>}
+      <span role="img" aria-label={`Arrow ${isLeft ? "left" : "right"}`} className={isLeft ? "ml-28" : "mr-28"}>
+        {isLeft ? (
+          <BsChevronLeft style={{ color: "black" }}/>
+        ) : (
+          <BsChevronRight />
+        )}
       </span>
     </button>
   );
 
   return (
-    <div className="px-12 pt-8 pb-20 inline-flex justify-center w-screen items-center ">
-      <div className="relative w-full">
-        <div className="carousel">
+    <div className="px-12 mt-8 mb-24 flex justify-center items-center w-screen ">
+      <div className="flex justify-center align-bottom w-3/4 ">
+        <div className="carousel flex items-center w-full">
           {sliderControl(true)}
-          {images.map((img, i) => (
-            <div className="flex-shrink-0 w-full self-center px-0 lg:px-36" key={img} ref={refs[i]}>
-              <span className="flex justify-center align-center lg:justify-start">
-                <img src={img} className="w-64" />  
-                <div className="hidden pl-0 lg:flex">
+          {resources.map((img, i) => {
+            console.log(documentToReactComponents(resources[i].fields["resourcesDetails"]));
+            return (
+              <div
+                className="flex-shrink-0 w-full self-center px-0 pt-4 lg:px-24"
+                key={i}
+                ref={refs[i]}
+              >
+                <span className="flex justify-center align-center lg:justify-start">
+                  <div className="relative self-center" style={{
+                    height: resources[i].fields["thumbnail"].fields.file.details.image.height + 100,
+                    width: resources[i].fields["thumbnail"].fields.file.details.image.width + 100
+                  }}>
+                    <Image
+                      layout={'fill'}
+                      objectFit={'contain'}
+                      src={
+                        "https:" + resources[i].fields["thumbnail"].fields.file.url
+                      }
+                    />
+                  </div>
+                  <div className="hidden pl-0 lg:flex">
                     <div className="flex-column justify-center align-middle max-w-3xl pl-20">
-                        <h2 className="text-2xl text-black font-semibold font-header pb-4">Waterdeep: The Long Trolltide</h2>
-                        <div className="px-1 py-2 mb-6 bg-tertiary w-24 flex justify-center rounded-sm">
-                            <p className="text-sm font-semibold font-heading">Favorite</p>
-                        </div>
-                        <p className="text-md text-black font-body hidden lg:flex align-center break-words">Waterdeep: The Long Trolltide is an epic campaign adventures that take place on the great city of Waterdeep. The story focuses on players as a enforcer known as The City Watch, where they will be faced to a brilliant criminal mastermind that has been going around for 3 months.  Will justice prevail in these such indecent times? </p>
-                        <button className="bg-secondary hover:bg-red-800 text-white mt-6 py-2 px-4 rounded shadow font-body">
-                            <p className="text-sm">Read more</p>
-                        </button>
+                      <h2 className="text-2xl text-black font-semibold font-header pb-4">
+                        {resources[i].fields["title"]}
+                      </h2>
+                      <div className="py-1.5 px-0.5 mb-6 bg-tertiary w-24 flex justify-center rounded-sm">
+                        <p className="text-sm font-semibold font-heading">
+                          Favorite
+                        </p>
+                      </div>
+                      <p className="text-md text-black font-body hidden lg:flex align-center break-words">
+                        {documentToReactComponents(resources[i].fields["resourcesDetails"])}
+                      </p>
+                      <button className="bg-secondary hover:bg-red-800 text-white mt-6 py-2 px-4 rounded shadow font-body">
+                        <Link href={"resources/" + resources[i].fields.slug}>
+                          <p className="text-sm">Read more</p>
+                        </Link>
+                      </button>
                     </div>
-                </div>
-              </span>
-            </div>
-          ))}
+                  </div>
+                </span>
+              </div>
+            );
+          })}
           {sliderControl()}
         </div>
       </div>

@@ -62,7 +62,7 @@ export default function Home({ resources }) {
           </div>
         <h2 className="text-2xl px-12 pt-16 lg:pt-0 font-header font-semibold">Featured Resources</h2>
         <div>
-          <Carousel/>
+          <Carousel resources={resources}/>
         </div>
       </div>
       <div className="min-w-full flex bg-primary justify-center" data-aos="fade-up">
