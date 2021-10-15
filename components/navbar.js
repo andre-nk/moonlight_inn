@@ -28,9 +28,11 @@ const Navbar = () => {
                 <div className="flex lg:hidden self-center">
                    <MenuDropdown/>
                 </div>
-                <div className="logo lg:order-1">
-                    <Image src="/logo.png" width="160px" height="34px"></Image>
-                </div>
+                <Link href="/">
+                    <div className="logo lg:order-1">
+                        <Image src="/logo.png" width="160px" height="34px"></Image>
+                    </div>
+                </Link>
             </nav>
         </div>
     );
