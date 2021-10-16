@@ -3,12 +3,16 @@ import Navbar from './navbar';
 
 const Layout = ({children}) => {
     return (
-        <div className="min-h-screen bg-white debug-screens">
-            <div className="sticky top-0 bg-primary z-50 lg:relative">
+        <div className="min-h-screen bg-primary debug-screens">
+            <div className="relative bg-primary">
                 <Navbar/>
             </div>
-            {children}
-            <Footer/>
+            <div className="relative">
+                {children}
+            </div>
+            <div className="relative">
+                <Footer/>
+            </div>
         </div>
     );
 }

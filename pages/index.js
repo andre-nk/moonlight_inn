@@ -21,23 +21,14 @@ export async function getStaticProps() {
 }
 
 export default function Home({ resources }) {
-  console.log(resources);
-
-  const images = [
-    "https://images.unsplash.com/photo-1516655855035-d5215bcb5604?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1200&q=60",
-    "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1200&q=60",
-    "https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1200&q=60",
-    "https://images.unsplash.com/photo-1458668383970-8ddd3927deed?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1200&q=60",
-  ];
-
   return (
     <div className="flex flex-col min-h-screen max-w-full py-0 overflow-hidden bg-white">
       <Head>
         <title>Moonlight Inn - Home</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="flex flex-col align-center justify-center min-w-full min-h-screen -mb-32 relative z-0 lg:flex-row lg:-mb-24 lg:justify-around lg:px-3">
-        <div className="self-center">
+      <div className="flex flex-col align-center justify-center min-w-full min-h-screen -mb-32 relative z-0 lg:flex lg:-mb-24 lg:justify-around lg:px-3">
+        <div className="self-center lg:block lg:absolute lg:left-20">
           <h2 className="font-header font-semibold text-4xl lg:text-5xl lg:text-left text-center">
             Moonlight Inn.
           </h2>
@@ -59,12 +50,11 @@ export default function Home({ resources }) {
             className="top-12 absolute z-0 animate__fadeIn"
           ></Image>
         </div>
-        <div className="self-start hidden lg:block">
+        <div className="hidden lg:block absolute right-20 top-8">
           <Image
             src="/landing.png"
             height="702px"
             width="600px"
-            className="absolute mr-20 z-0 animate__fadeIn"
           ></Image>
         </div>
       </div>
@@ -85,7 +75,7 @@ export default function Home({ resources }) {
         className="min-w-full flex bg-primary justify-center"
         data-aos="fade-up"
       >
-        <div className="pt-8 pb-24 flex-column">
+        <div className="pt-8 pb-24 flex-column" id="support">
           <div className="flex justify-center">
             <Image src="/chest.png" height="180px" width="142px"></Image>
           </div>
