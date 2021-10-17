@@ -17,9 +17,7 @@ const Carousel = ({ resources }) => {
 
     refs[i].current.scrollIntoView({
       behavior: "smooth",
-
       block: "nearest",
-
       inline: "start",
     });
   };
@@ -62,21 +60,20 @@ const Carousel = ({ resources }) => {
 
   return (
     <div className="px-12 mt-8 mb-24 flex justify-center items-center w-screen ">
-      <div className="flex justify-center align-bottom w-3/4 ">
+      <div className="flex justify-center align-bottom">
         <div className="carousel flex items-center w-full">
           {sliderControl(true)}
           {resources.map((img, i) => {
-            console.log(documentToReactComponents(resources[i].fields["resourcesDetails"]));
             return (
               <div
-                className="flex-shrink-0 w-full self-center px-0 pt-4 lg:px-24"
+                className="flex-shrink-0 w-full self-center pt-4 lg:px-24"
                 key={i}
                 ref={refs[i]}
               >
-                <span className="flex justify-center align-center lg:justify-start">
+                <span className="flex justify-center align-center align-items-center">
                   <div className="relative self-center" style={{
-                    height: resources[i].fields["thumbnail"].fields.file.details.image.height + 100,
-                    width: resources[i].fields["thumbnail"].fields.file.details.image.width + 100
+                    height: 355,
+                    width: 295
                   }}>
                     <Image
                       layout={'fill'}
@@ -86,7 +83,7 @@ const Carousel = ({ resources }) => {
                       }
                     />
                   </div>
-                  <div className="hidden pl-0 lg:flex">
+                  <div className="hidden pl-0 lg:flex self-center">
                     <div className="flex-column justify-center align-middle max-w-3xl pl-20">
                       <h2 className="text-2xl text-black font-semibold font-header pb-4">
                         {resources[i].fields["title"]}

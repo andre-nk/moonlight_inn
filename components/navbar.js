@@ -14,8 +14,6 @@ const Navbar = () => {
     }
   });
 
-  console.log(isCurrentRoute);
-
   return (
     <div className="absolute z-20 min-w-full">
       <nav className="flex flex-row px-10 lg:px-28 py-4 justify-between align-center bg-primary">

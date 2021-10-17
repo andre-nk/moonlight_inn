@@ -5,7 +5,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: theme => ({
-        'email': "url('https://i.ibb.co/bFCZqwv/wallpaper.png')"
+        'email': "url('https://i.ibb.co/bFCZqwv/wallpaper.png')",
       }),
       colors: {
         'primary': '#FFFCF1',

@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 const Footer = () => {
 
     var mailURL = "https://mail.google.com/mail/u/0/?fs=1&to=moonlightinnsupport@gmail.com&su=Needed+Support+on+Moonlight+Inn+Website+&body=Hi%20there&tf=cm";

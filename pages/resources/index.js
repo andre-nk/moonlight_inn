@@ -1,9 +1,7 @@
 import Head from "next/head";
 import { FiSearch } from "react-icons/fi";
 import { createClient } from "contentful";
-import Image from "next/image";
-// import Carousel from "../components/carousel";
-// import { createClient } from "contentful";
+import { ResourceCard } from "../../components/resource-card";
 
 export async function getStaticProps() {
   const client = createClient({
@@ -53,30 +51,10 @@ export default function Resources({ resources }) {
           </form>
         </div>
         <div className="w-full justify-center">
-          <div className="py-8 grid grid-cols-2 lg:grid-flow-row lg:grid-cols-none">
+          <div className="py-8 grid grid-cols-2 gap-4 md:gap-8 lg:gap-12 md:grid-cols-3 lg:grid-cols-5">
             {resources.map((item, i) => {
               return (
-                <div className="col-span-1">
-                  <div
-                    className="relative flex justify-center self-center shadow-sm hover:drop-shadow-xl"
-                    key={i}
-                    style={{
-                      height: 250,
-                      width: 180,
-                    }}
-                  >
-                    <Image
-                      layout={"fill"}
-                      src={
-                        "https:" +
-                        item.fields["thumbnail"].fields.file.url
-                      }
-                    />
-                  </div>
-                  <div className="py-4">
-                      <h3 className="font-medium text-body">{item.fields["title"]}</h3>
-                  </div>
-                </div>
+                <ResourceCard item={item} index={i}/>
               );
             })}
           </div>

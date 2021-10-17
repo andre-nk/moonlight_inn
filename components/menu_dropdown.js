@@ -15,8 +15,6 @@ export default function MenuDropdown() {
     } 
   });
 
-  console.log(isCurrentRoute === '/resources');
-
   return (
     <div className="text-right flex">
       <Menu as="div" className="relative inline-block text-left">
