@@ -3,7 +3,7 @@ import Navbar from './navbar';
 
 const Layout = ({children}) => {
     return (
-        <div className="min-h-screen bg-primary debug-screens">
+        <div className="bg-primary debug-screens max-h-full">
             <div className="relative bg-primary">
                 <Navbar/>
             </div>

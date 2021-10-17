@@ -64,8 +64,11 @@ export default function MenuDropdown() {
                     className={`${
                       active ? 'bg-violet-500 text-white' : 'text-gray-900'
                     } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
+                    onClick={() => {
+                      window.open("https://www.buymeacoffee.com/fullstackdre");
+                    }}
                   >
-                    <Link href="/support"><p className={isCurrentRoute === '/support'  ? `text-md font-semibold font-body` : `text-md font-body`}>Support us</p></Link>
+                    <p className="text-md font-body">Support us</p>
                   </button>
                 )}
               </Menu.Item>

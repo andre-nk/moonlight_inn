@@ -38,9 +38,9 @@ const Navbar = () => {
           </Link>
           <button 
             className="bg-secondary hover:bg-red-800 text-white font-body text-sm ml-6 py-1.5 px-4 rounded shadow"
-            onClick={() => {document.getElementById('support').scrollIntoView({
-              behavior: 'smooth'
-            });}}
+            onClick={() => {
+              window.open("https://www.buymeacoffee.com/fullstackdre");
+            }}
           >
             Support us
           </button>
@@ -49,7 +49,7 @@ const Navbar = () => {
           <MenuDropdown />
         </div>
         <Link href="/">
-          <div className="logo lg:order-1">
+          <div className="logo lg:order-1 cursor-pointer">
             <Image src="/logo.png" width="160px" height="34px"></Image>
           </div>
         </Link>

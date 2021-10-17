@@ -30,7 +30,7 @@ export default function Home({ resources }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="flex flex-col align-center justify-center min-w-full min-h-screen relative z-0 lg:flexlg:justify-around lg:px-3">
-        <div className="self-center mt-64 lg:block lg:absolute lg:mt-20 lg:left-20">
+        <div className="self-center mt-8 lg:block lg:absolute lg:mt-6 lg:left-20">
           <h2 className="font-header font-semibold text-4xl lg:text-5xl lg:text-left text-center">
             Moonlight Inn.
           </h2>
@@ -47,7 +47,9 @@ export default function Home({ resources }) {
             </button>
           </div>
         </div>
-        <div className="self-center mt-12 mb-56 relative lg:hidden overflow-visible">
+
+        {/*Landing SM*/}
+        <div className="self-center mt-12 mb-0 relative lg:hidden overflow-visible">
           <Image
             src="/mobile-landing.png"
             height="180px"
@@ -55,11 +57,14 @@ export default function Home({ resources }) {
             className="top-12 absolute z-0 animate__fadeIn"
           ></Image>
         </div>
-        <div className="hidden lg:block absolute right-20 top-8">
+
+        {/*Landing LG*/}
+        <div className="hidden lg:block absolute right-20 top-14">
           <Image src="/landing.png" height="702px" width="600px"></Image>
         </div>
       </div>
-      <div className="top-0 min-w-full bg-primary relative pt-12">
+      
+      <div className="lg:-mt-20 min-w-full bg-primary relative">
         <div className="min-w-full pt-4 mb-10 flex justify-center lg:justify-start lg:hidden">
           <button
             className="bg-secondary hover:bg-red-800 text-white mt-6 font-semibold py-3.5 px-6 rounded shadow font-body"
@@ -68,13 +73,14 @@ export default function Home({ resources }) {
             Discover 100+ resources
           </button>
         </div>
-        <h2 className="text-2xl px-8 pt-12 lg:px-12 lg:pt-0 font-header font-semibold">
+        <h2 className="text-2xl px-8 pt-12 lg:px-12 lg:pt-12 font-header font-semibold">
           Featured Resources
         </h2>
         <div>
           <Carousel resources={resources} />
         </div>
       </div>
+
       <div className="min-w-full flex bg-primary justify-center">
         <div className="pb-24 flex-column" id="support">
           <div className="flex justify-center">

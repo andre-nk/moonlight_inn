@@ -1,6 +1,7 @@
 import { useState, createRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import Router from 'next/router'
 import { BsChevronRight, BsChevronLeft } from "react-icons/bs";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
@@ -71,10 +72,14 @@ const Carousel = ({ resources }) => {
                 ref={refs[i]}
               >
                 <span className="flex justify-center align-center align-items-center">
-                  <div className="relative self-center" style={{
-                    height: 355,
-                    width: 295
-                  }}>
+                  <div 
+                    className="relative self-center transition duration-200 ease-in-out transform hover:scale-105 hover:drop-shadow-xl" 
+                    style={{
+                      height: 325,
+                      width: 265
+                    }}
+                    onClick={() => Router.push(`/resources/${resources[i].fields["slug"]}`)}  
+                  >
                     <Image
                       layout={'fill'}
                       objectFit={'contain'}
@@ -88,11 +93,6 @@ const Carousel = ({ resources }) => {
                       <h2 className="text-2xl text-black font-semibold font-header pb-4">
                         {resources[i].fields["title"]}
                       </h2>
-                      <div className="py-1.5 px-0.5 mb-6 bg-tertiary w-24 flex justify-center rounded-sm">
-                        <p className="text-sm font-semibold font-heading">
-                          Favorite
-                        </p>
-                      </div>
                       <p className="text-md text-black font-body hidden lg:flex align-center break-words">
                         {documentToReactComponents(resources[i].fields["resourcesDetails"])}
                       </p>
