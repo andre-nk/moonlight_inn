@@ -2,6 +2,8 @@ import { createClient } from "contentful";
 import Image from "next/dist/client/image";
 import Head from "next/dist/shared/lib/head";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import CustomLoader from "../../components/custom_loader";
+import download from "downloadjs";
 
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID,
@@ -27,12 +29,24 @@ export const getStaticProps = async ({ params }) => {
     "fields.slug": params.slug,
   });
 
+  if (!items.length) {
+    return {
+      redirect: {
+        destination: "/404",
+        permanent: false,
+      },
+    };
+  }
+
   return {
     props: { resources: items[0] },
+    revalidate: 1,
   };
 };
 
 export default function ResourcesDetails({ resources }) {
+  if (!resources) return <CustomLoader />;
+
   return (
     <div>
       <Head>
@@ -100,16 +114,41 @@ export default function ResourcesDetails({ resources }) {
         <div className="w-full flex justify-between mt-10">
           <button
             className="bg-transparent hover:bg-tertiary text-black border border-black hover:border-transparent py-3 mr-2 text-md flex-1"
-            onClick={() => {}}
+            onClick={() => {
+              
+            }}
           >
             Share material
           </button>
-          <button
-            className="bg-secondary hover:bg-red-800 text-white py-3 ml-2 text-md shadow flex-1"
-            onClick={() => {}}
-          >
-            Download material
-          </button>
+          {
+            resources.fields["resourceFile"] == null
+            ? (
+              <div></div>
+              )
+            : (
+              <button
+                className="bg-secondary hover:bg-red-800 text-white py-3 ml-2 text-md shadow flex-1"
+                onClick={() => {
+                  if (resources.fields["resourceFile"] == null) {
+                    console.error("File doesn't exist");
+                  } else {
+                    resources.fields["resourceFile"].map((file) => {
+                      var url = file.fields["file"].url;
+                      if (url.slice(0, 2) === "//") {
+                        console.log(`https:${url}`);
+                        download(`https:${url}`);
+                      } else if (url.slice(0, 4) === "http") {
+                        console.log(url);
+                        download(url);
+                      }
+                    });
+                  }
+                }}
+              >
+                Download material
+              </button>
+            )
+          }
         </div>
       </div>
 
@@ -120,17 +159,44 @@ export default function ResourcesDetails({ resources }) {
         </p>
         <div className="w-full flex justify-between mt-10">
           <button
-            className="bg-transparent hover:bg-tertiary text-black border border-black hover:border-transparent py-3 mr-4 text-md flex-1"
+            className= {
+              resources.fields["resourceFile"] == null
+              ? "bg-transparent hover:bg-tertiary text-black border border-black hover:border-transparent py-3 text-md flex-1"
+              : "bg-transparent hover:bg-tertiary text-black border border-black hover:border-transparent py-3 mr-4 text-md flex-1"
+            }
             onClick={() => {}}
           >
             Share material
           </button>
-          <button
-            className="bg-secondary hover:bg-red-800 text-white py-3 ml-4 text-md shadow flex-1"
-            onClick={() => {}}
-          >
-            Download material
-          </button>
+          {
+            resources.fields["resourceFile"] == null
+            ? (
+              <div></div>
+              )
+            : (
+              <button
+                className="bg-secondary hover:bg-red-800 text-white py-3 ml-4 text-md shadow flex-1"
+                onClick={() => {
+                  if (resources.fields["resourceFile"] == null) {
+                    console.error("File doesn't exist");
+                  } else {
+                    resources.fields["resourceFile"].map((file) => {
+                      var url = file.fields["file"].url;
+                      if (url.slice(0, 2) === "//") {
+                        console.log(`https:${url}`);
+                        download(`https:${url}`);
+                      } else if (url.slice(0, 4) === "http") {
+                        console.log(url);
+                        download(url);
+                      }
+                    });
+                  }
+                }}
+              >
+                Download material
+              </button>
+            )
+          }
         </div>
       </div>
     </div>

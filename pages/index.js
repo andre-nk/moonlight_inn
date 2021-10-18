@@ -19,6 +19,7 @@ export async function getStaticProps() {
     props: {
       resources: res.items,
     },
+    revalidate: 1
   };
 }
 
@@ -77,7 +78,7 @@ export default function Home({ resources }) {
           Featured Resources
         </h2>
         <div>
-          <Carousel resources={resources} />
+          <Carousel resources={resources.slice(0, 3)} />
         </div>
       </div>
 
@@ -137,7 +138,7 @@ export default function Home({ resources }) {
                   type="email"
                   name="email"
                   id="tlemail"
-                  placeholder="Enter your e-mail address here..."
+                  placeholder="Drop your e-mail address here..."
                 ></input>
                 <div className="min-w-full flex justify-center lg:justify-start">
                   <button
