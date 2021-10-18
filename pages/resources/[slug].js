@@ -50,6 +50,8 @@ export default function ResourcesDetails({ resources }) {
   const { asPath } = useRouter();
   if (!resources) return <CustomLoader />;
 
+  console.log(resources);
+
   return (
     <div>
       <Head>
@@ -67,6 +69,7 @@ export default function ResourcesDetails({ resources }) {
           layout="fill"
           className="w-full object-cover"
           src={"https:" + resources.fields["cover"].fields.file.url}
+          galleryimg="no" 
         />
       </div>
       <div className="w-full flex relative -mt-24 justify-center lg:justify-center lg:px-24">
@@ -82,11 +85,12 @@ export default function ResourcesDetails({ resources }) {
             alt="thumbnail"
             layout={"fill"}
             src={"https:" + resources.fields["thumbnail"].fields.file.url}
+            galleryimg="no" 
           />
         </div>
 
         {/*LG - XL*/}
-        <div className="align-baseline hidden lg:flex">
+        <div className="align-baseline hidden lg:flex lg:justify-end">
           <div
             className="relative self-center hidden lg:flex lg:flex-row shadow-xl"
             style={{
@@ -98,15 +102,33 @@ export default function ResourcesDetails({ resources }) {
               alt="thumbnail"
               layout={"fill"}
               src={"https:" + resources.fields["thumbnail"].fields.file.url}
+              galleryimg="no" 
             />
           </div>
-          <div className="h-full pt-40 pl-12">
+          <div className="h-full pl-12 pt-32">
             <h2 className="text-4xl pb-4 font-semibold">
               {resources.fields["title"]}
             </h2>
-            <h2 className="text-xl pb-4 font-body">
+            <h2 className="text-xl pb-8 font-body">
               author: {resources.fields["author"]}
             </h2>
+            <div className="self-center text-center flex flex-row">
+              {resources.fields["contentType"].map((item, i) => {
+                return (
+                  <div
+                    className={
+                      resources.fields["contentType"].length > 1
+                        ? resources.fields["contentType"].length == i
+                          ? "text-center px-4 py-2 mb-6 bg-tertiary text-sm"
+                          : "text-center px-4 py-2 mb-6 mr-3 bg-tertiary text-sm"
+                        : "text-center px-4 py-2 mb-6 bg-tertiary text-sm"
+                    }
+                  >
+                    {item}
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
@@ -119,6 +141,23 @@ export default function ResourcesDetails({ resources }) {
         <h2 className="self-center text-center pb-4 font-body text-md">
           author: {resources.fields["author"]}
         </h2>
+        <div className="self-center text-center flex flex-row">
+          {resources.fields["contentType"].map((item, i) => {
+            return (
+              <div
+                className={
+                  resources.fields["contentType"].length > 1
+                    ? resources.fields["contentType"].length == i
+                      ? "text-center px-3 py-1.5 mb-6 bg-tertiary text-xs"
+                      : "text-center px-3 py-1.5 mb-6 mr-3 bg-tertiary text-xs"
+                    : "text-center px-3 py-1.5 mb-6 bg-tertiary text-xs"
+                }
+              >
+                {item}
+              </div>
+            );
+          })}
+        </div>
         <p className="self-center text-center text-md font-light">
           {documentToReactComponents(resources.fields["resourcesDetails"])}
         </p>
@@ -130,7 +169,7 @@ export default function ResourcesDetails({ resources }) {
               title: resources.fields["title"],
             }}
           >
-            <button className="bg-transparent hover:bg-tertiary text-black border border-black hover:border-transparent py-3 mr-2 text-md flex-1">
+            <button className="bg-transparent hover:bg-tertiary text-black border border-black hover:border-transparent duration-200 py-3 mr-2 text-md flex-1">
               Share material
             </button>
           </RWebShare>
@@ -143,16 +182,14 @@ export default function ResourcesDetails({ resources }) {
                 if (resources.fields["resourceFile"] == null) {
                   console.error("File doesn't exist");
                 } else {
-                  resources.fields["resourceFile"].map((file) => {
-                    var url = file.fields["file"].url;
-                    if (url.slice(0, 2) === "//") {
-                      console.log(`https:${url}`);
-                      download(`https:${url}`);
-                    } else if (url.slice(0, 4) === "http") {
-                      console.log(url);
-                      download(url);
-                    }
-                  });
+                  var url = resources.fields["resourceFile"].fields["file"].url;
+                  if (url.slice(0, 2) === "//") {
+                    console.log(`https:${url}`);
+                    download(`https:${url}`);
+                  } else if (url.slice(0, 4) === "http") {
+                    console.log(url);
+                    download(url);
+                  }
                 }
               }}
             >
@@ -175,7 +212,7 @@ export default function ResourcesDetails({ resources }) {
               title: resources.fields["title"],
             }}
           >
-            <button className="bg-transparent hover:bg-tertiary text-black border border-black hover:border-transparent py-3 mr-2 text-md flex-1">
+            <button className="bg-transparent hover:bg-tertiary text-black border border-black hover:border-transparent duration-200 py-3 mr-2 text-md flex-1">
               Share material
             </button>
           </RWebShare>
@@ -188,16 +225,14 @@ export default function ResourcesDetails({ resources }) {
                 if (resources.fields["resourceFile"] == null) {
                   console.error("File doesn't exist");
                 } else {
-                  resources.fields["resourceFile"].map((file) => {
-                    var url = file.fields["file"].url;
-                    if (url.slice(0, 2) === "//") {
-                      console.log(`https:${url}`);
-                      download(`https:${url}`);
-                    } else if (url.slice(0, 4) === "http") {
-                      console.log(url);
-                      download(url);
-                    }
-                  });
+                  var url = resources.fields["resourceFile"].fields["file"].url;
+                  if (url.slice(0, 2) === "//") {
+                    console.log(`https:${url}`);
+                    download(`https:${url}`);
+                  } else if (url.slice(0, 4) === "http") {
+                    console.log(url);
+                    download(url);
+                  }
                 }
               }}
             >
