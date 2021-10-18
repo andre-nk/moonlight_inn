@@ -62,8 +62,8 @@ export default function Home({ resources }) {
         </div>
 
         {/*Landing LG*/}
-        <div className="hidden lg:block self-center relative ml-16">
-          <Image alt="desktop-landing" src="/landing.png" height="702px" width="600px"></Image>
+        <div className="hidden lg:block self-center relative ml-16 h-screen lg:w-3/4 xl:w-1/2">
+          <Image alt="desktop-landing" src="/landing.png" layout="fill"></Image>
         </div>
       </div>
 

@@ -4,6 +4,8 @@ import Head from "next/dist/shared/lib/head";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import CustomLoader from "../../components/custom_loader";
 import download from "downloadjs";
+import { useRouter } from "next/dist/client/router";
+import { RWebShare } from "react-web-share";
 
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID,
@@ -45,12 +47,16 @@ export const getStaticProps = async ({ params }) => {
 };
 
 export default function ResourcesDetails({ resources }) {
+  const { asPath } = useRouter();
   if (!resources) return <CustomLoader />;
-  console.log(resources.fields);
+
   return (
     <div>
       <Head>
-        <meta name={resources.fields["title"]} content="Moonlight Inn's official homebrew resources" />
+        <meta
+          name={resources.fields["title"]}
+          content="Moonlight Inn's official homebrew resources"
+        />
         <html lang="en"></html>
         <title>{resources.fields["title"]}</title>
         <link rel="icon" href="/favicon.ico" />
@@ -117,43 +123,42 @@ export default function ResourcesDetails({ resources }) {
           {documentToReactComponents(resources.fields["resourcesDetails"])}
         </p>
         <div className="w-full flex justify-between mt-10">
-          <button
-            className="bg-transparent hover:bg-tertiary text-black border border-black hover:border-transparent py-3 mr-2 text-md flex-1"
-            onClick={() => {
-              
+          <RWebShare
+            data={{
+              text: "Adventurers! Check out this hot homebrew D&D resources only from Moonlight Inn",
+              url: "https://moonlight-inn.vercel.app/" + asPath,
+              title: resources.fields["title"],
             }}
           >
-            Share material
-          </button>
-          {
-            resources.fields["resourceFile"] == null
-            ? (
-              <div></div>
-              )
-            : (
-              <button
-                className="bg-secondary hover:bg-red-800 text-white py-3 ml-2 text-md shadow flex-1"
-                onClick={() => {
-                  if (resources.fields["resourceFile"] == null) {
-                    console.error("File doesn't exist");
-                  } else {
-                    resources.fields["resourceFile"].map((file) => {
-                      var url = file.fields["file"].url;
-                      if (url.slice(0, 2) === "//") {
-                        console.log(`https:${url}`);
-                        download(`https:${url}`);
-                      } else if (url.slice(0, 4) === "http") {
-                        console.log(url);
-                        download(url);
-                      }
-                    });
-                  }
-                }}
-              >
-                Download material
-              </button>
-            )
-          }
+            <button className="bg-transparent hover:bg-tertiary text-black border border-black hover:border-transparent py-3 mr-2 text-md flex-1">
+              Share material
+            </button>
+          </RWebShare>
+          {resources.fields["resourceFile"] == null ? (
+            <div></div>
+          ) : (
+            <button
+              className="bg-secondary hover:bg-red-800 text-white py-3 ml-2 text-md shadow flex-1"
+              onClick={() => {
+                if (resources.fields["resourceFile"] == null) {
+                  console.error("File doesn't exist");
+                } else {
+                  resources.fields["resourceFile"].map((file) => {
+                    var url = file.fields["file"].url;
+                    if (url.slice(0, 2) === "//") {
+                      console.log(`https:${url}`);
+                      download(`https:${url}`);
+                    } else if (url.slice(0, 4) === "http") {
+                      console.log(url);
+                      download(url);
+                    }
+                  });
+                }
+              }}
+            >
+              Download material
+            </button>
+          )}
         </div>
       </div>
 
@@ -163,45 +168,42 @@ export default function ResourcesDetails({ resources }) {
           {documentToReactComponents(resources.fields["resourcesDetails"])}
         </p>
         <div className="w-full flex justify-between mt-10">
-          <button
-            className= {
-              resources.fields["resourceFile"] == null
-              ? "bg-transparent hover:bg-tertiary text-black border border-black hover:border-transparent py-3 text-md flex-1"
-              : "bg-transparent hover:bg-tertiary text-black border border-black hover:border-transparent py-3 mr-4 text-md flex-1"
-            }
-            onClick={() => {}}
+          <RWebShare
+            data={{
+              text: "Adventurers! Check out this hot homebrew D&D resources only from Moonlight Inn",
+              url: "https://moonlight-inn.vercel.app/" + asPath,
+              title: resources.fields["title"],
+            }}
           >
-            Share material
-          </button>
-          {
-            resources.fields["resourceFile"] == null
-            ? (
-              <div></div>
-              )
-            : (
-              <button
-                className="bg-secondary hover:bg-red-800 text-white py-3 ml-4 text-md shadow flex-1"
-                onClick={() => {
-                  if (resources.fields["resourceFile"] == null) {
-                    console.error("File doesn't exist");
-                  } else {
-                    resources.fields["resourceFile"].map((file) => {
-                      var url = file.fields["file"].url;
-                      if (url.slice(0, 2) === "//") {
-                        console.log(`https:${url}`);
-                        download(`https:${url}`);
-                      } else if (url.slice(0, 4) === "http") {
-                        console.log(url);
-                        download(url);
-                      }
-                    });
-                  }
-                }}
-              >
-                Download material
-              </button>
-            )
-          }
+            <button className="bg-transparent hover:bg-tertiary text-black border border-black hover:border-transparent py-3 mr-2 text-md flex-1">
+              Share material
+            </button>
+          </RWebShare>
+          {resources.fields["resourceFile"] == null ? (
+            <div></div>
+          ) : (
+            <button
+              className="bg-secondary hover:bg-red-800 text-white py-3 ml-4 text-md shadow flex-1"
+              onClick={() => {
+                if (resources.fields["resourceFile"] == null) {
+                  console.error("File doesn't exist");
+                } else {
+                  resources.fields["resourceFile"].map((file) => {
+                    var url = file.fields["file"].url;
+                    if (url.slice(0, 2) === "//") {
+                      console.log(`https:${url}`);
+                      download(`https:${url}`);
+                    } else if (url.slice(0, 4) === "http") {
+                      console.log(url);
+                      download(url);
+                    }
+                  });
+                }
+              }}
+            >
+              Download material
+            </button>
+          )}
         </div>
       </div>
     </div>
