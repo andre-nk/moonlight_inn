@@ -19,7 +19,7 @@ export default function MenuDropdown() {
     <div className="text-right flex">
       <Menu as="div" className="relative inline-block text-left">
         <div>
-          <Menu.Button className="">
+          <Menu.Button aria-label="menu">
             <FiMenu size={24}/>
           </Menu.Button>
         </div>

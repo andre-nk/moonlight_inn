@@ -81,6 +81,7 @@ const Carousel = ({ resources }) => {
                     onClick={() => Router.push(`/resources/${resources[i].fields["slug"]}`)}  
                   >
                     <Image
+                      alt="thumbnail"
                       layout={'fill'}
                       objectFit={'contain'}
                       src={

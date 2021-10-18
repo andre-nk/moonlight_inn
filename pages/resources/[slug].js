@@ -50,11 +50,14 @@ export default function ResourcesDetails({ resources }) {
   return (
     <div>
       <Head>
+        <meta name={resources.fields["title"]} content="Moonlight Inn's official homebrew resources" />
+        <html lang="en"></html>
         <title>{resources.fields["title"]}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="w-full h-64 lg:h-96 overflow-hidden relative">
         <Image
+          alt="cover"
           layout="fill"
           className="w-full object-cover"
           src={"https:" + resources.fields["cover"].fields.file.url}
@@ -70,6 +73,7 @@ export default function ResourcesDetails({ resources }) {
           }}
         >
           <Image
+            alt="thumbnail"
             layout={"fill"}
             src={"https:" + resources.fields["thumbnail"].fields.file.url}
           />
@@ -85,6 +89,7 @@ export default function ResourcesDetails({ resources }) {
             }}
           >
             <Image
+              alt="thumbnail"
               layout={"fill"}
               src={"https:" + resources.fields["thumbnail"].fields.file.url}
             />

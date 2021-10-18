@@ -3,7 +3,6 @@ import Image from "next/image";
 import Carousel from "../components/carousel";
 import { createClient } from "contentful";
 import Router from "next/router";
-import Link from "next/link";
 
 export async function getStaticProps() {
   const client = createClient({
@@ -27,6 +26,8 @@ export default function Home({ resources }) {
   return (
     <div className="flex flex-col min-h-screen max-w-full py-0 overflow-hidden bg-white">
       <Head>
+        <meta name="Homepage" content="Indonesian-based D&D community that provides free and high-quality homebrew resources"/>
+        <html lang="en"></html>
         <title>Moonlight Inn - Home</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -52,6 +53,7 @@ export default function Home({ resources }) {
         {/*Landing SM*/}
         <div className="self-center mt-8 relative lg:hidden">
           <Image
+            alt="mobile-landing"
             src="/mobile-landing.png"
             height="180px"
             width="550px"
@@ -61,7 +63,7 @@ export default function Home({ resources }) {
 
         {/*Landing LG*/}
         <div className="hidden lg:block self-center relative ml-16">
-          <Image src="/landing.png" height="702px" width="600px"></Image>
+          <Image alt="desktop-landing" src="/landing.png" height="702px" width="600px"></Image>
         </div>
       </div>
 
@@ -85,7 +87,7 @@ export default function Home({ resources }) {
       <div className="min-w-full flex bg-primary justify-center">
         <div className="pb-24 flex-column" id="support">
           <div className="flex justify-center">
-            <Image src="/chest.png" height="180px" width="142px"></Image>
+            <Image alt="support-chest" src="/chest.png" height="180px" width="142px"></Image>
           </div>
           <h2 className="font-header text-3xl font-semibold mt-8 mb-4 text-center">
             Support Us!
@@ -110,6 +112,7 @@ export default function Home({ resources }) {
             }
           >
             <Image
+              alt="buy-me-a-coffee-btn"
               height="57.5px"
               width="207px"
               src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
@@ -122,7 +125,7 @@ export default function Home({ resources }) {
         <div
           className="relative z-0 w-full lg:w-1/2 lg:h-80 h-44 flex self-center"
         >
-          <Image layout={"fill"} src="/wallpaper.png" />
+          <Image alt="wallpaper-email" layout={"fill"} src="/wallpaper.png" />
         </div>
         <div className="bg-primary w-full py-8 px-8 flex justify-center items-center z-10 lg:w-1/2 lg:relative">
           <div className="flex-column justify-center">
@@ -138,6 +141,7 @@ export default function Home({ resources }) {
                 action="https://tinyletter.com/moonlightinn"
                 method="post"
                 target="popupwindow"
+                rel="noopener"
                 onSubmit="{window.open('https://tinyletter.com/moonlightinn', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true}"
               >
                 <input

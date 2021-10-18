@@ -50,7 +50,7 @@ const Navbar = () => {
         </div>
         <Link href="/">
           <div className="logo lg:order-1 cursor-pointer">
-            <Image src="/logo.png" width="160px" height="34px"></Image>
+            <Image alt="logo" src="/logo.png" width="160px" height="34px"></Image>
           </div>
         </Link>
       </nav>

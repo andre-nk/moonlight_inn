@@ -16,6 +16,7 @@ export const ResourceCard = ({item, index}) => {
         }}
       >
         <Image
+          alt="thumbnail"
           layout={"fill"}
           src={"https:" + item.fields["thumbnail"].fields.file.url}
         />

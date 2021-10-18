@@ -25,6 +25,8 @@ export default function Resources({ resources }) {
   return (
     <div>
       <Head>
+        <meta name="Moonlight Inn Resources" content="Moonlight Inn's official homebrew resources" />
+        <html lang="en"></html>
         <title>Moonlight Inn - Resources</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
