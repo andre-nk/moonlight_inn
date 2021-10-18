@@ -30,7 +30,7 @@ export default function Resources({ resources }) {
       </Head>
       <div className="pt-24 pb-20 px-24">
         <div className="w-full justify-center">
-          <div className="py-8 lg:pb-20 grid grid-cols-2 gap-4 md:gap-8 lg:gap-12 md:grid-cols-3 lg:grid-cols-5">
+          <div className="py-8 lg:pb-20 grid grid-cols-1 gap-8 lg:gap-12 md:grid-cols-3 lg:grid-cols-5">
             {resources.map((item, i) => {
               return (
                 <ResourceCard item={item} index={i}/>

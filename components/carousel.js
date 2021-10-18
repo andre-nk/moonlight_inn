@@ -41,7 +41,7 @@ const Carousel = ({ resources }) => {
     }
   };
 
-  const arrowStyle = "absolute text-2xl z-10 h-10 w-10 flex items-center justify-center";
+  const arrowStyle = "absolute text-2xl h-10 w-10 flex items-center justify-center";
 
   const sliderControl = (isLeft) => (
     <button
@@ -49,7 +49,7 @@ const Carousel = ({ resources }) => {
       onClick={isLeft ? previousImage : nextImage}
       className={`${arrowStyle} ${isLeft ? "left-2" : "right-2"}`}
     >
-      <span role="img" aria-label={`Arrow ${isLeft ? "left" : "right"}`} className={isLeft ? "ml-28" : "mr-28"}>
+      <span role="img" aria-label={`Arrow ${isLeft ? "left" : "right"}`} className={isLeft ? "ml-6 lg:ml-24" : "mr-6 lg:mr-24"}>
         {isLeft ? (
           <BsChevronLeft style={{ color: "black" }}/>
         ) : (
@@ -60,14 +60,14 @@ const Carousel = ({ resources }) => {
   );
 
   return (
-    <div className="px-12 mt-8 mb-24 flex justify-center items-center w-screen ">
+    <div className="mt-8 mb-24 flex justify-center items-center w-screen ">
       <div className="flex justify-center align-bottom">
         <div className="carousel flex items-center w-full">
           {sliderControl(true)}
           {resources.map((img, i) => {
             return (
               <div
-                className="flex-shrink-0 w-full self-center pt-4 lg:px-24"
+                className="flex-shrink-0 w-full self-center pt-4 px-24 px- lg:px-24"
                 key={i}
                 ref={refs[i]}
               >

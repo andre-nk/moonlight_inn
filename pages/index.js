@@ -2,8 +2,8 @@ import Head from "next/head";
 import Image from "next/image";
 import Carousel from "../components/carousel";
 import { createClient } from "contentful";
-import Router from 'next/router';
-import Link from 'next/link';
+import Router from "next/router";
+import Link from "next/link";
 
 export async function getStaticProps() {
   const client = createClient({
@@ -19,7 +19,7 @@ export async function getStaticProps() {
     props: {
       resources: res.items,
     },
-    revalidate: 1
+    revalidate: 1,
   };
 }
 
@@ -30,14 +30,14 @@ export default function Home({ resources }) {
         <title>Moonlight Inn - Home</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="flex flex-col align-center justify-center min-w-full min-h-screen relative z-0 lg:flexlg:justify-around lg:px-3">
-        <div className="self-center mt-8 lg:block lg:absolute lg:mt-6 lg:left-20">
+
+      <div className="flex flex-col align-center justify-center min-h-screen relative z-0 lg:mx-24 lg:flex lg:flex-row">
+        <div className="self-center -mt-4 lg:mt-0 lg:self-center lg:relative">
           <h2 className="font-header font-semibold text-4xl lg:text-5xl lg:text-left text-center">
             Moonlight Inn.
           </h2>
-          <p className="font-body text-lg leading-8 pt-5 lg:leading-9 lg:text-xl lg:text-left text-center">
-            A curation of <strong> free, epic and definitely critical </strong>{" "}
-            <br /> D&D resources for your next campaign.
+          <p className="font-body text-lg leading-8 pt-5 px-12 lg:px-0 lg:leading-9 lg:text-xl lg:text-left text-center">
+            A curation of <strong> free, epic and definitely critical </strong>{" "} D&D resources for your next campaign.
           </p>
           <div className="min-w-full hidden justify-center lg:justify-start lg:flex">
             <button
@@ -50,7 +50,7 @@ export default function Home({ resources }) {
         </div>
 
         {/*Landing SM*/}
-        <div className="self-center mt-12 mb-0 relative lg:hidden overflow-visible">
+        <div className="self-center mt-8 relative lg:hidden">
           <Image
             src="/mobile-landing.png"
             height="180px"
@@ -60,17 +60,17 @@ export default function Home({ resources }) {
         </div>
 
         {/*Landing LG*/}
-        <div className="hidden lg:block absolute right-20 top-14">
+        <div className="hidden lg:block self-center relative ml-16">
           <Image src="/landing.png" height="702px" width="600px"></Image>
         </div>
       </div>
-      
-      <div className="lg:-mt-20 min-w-full bg-primary relative">
+
+      <div className="-mt-32 lg:-mt-16 min-w-full bg-primary relative">
         <div className="min-w-full pt-4 mb-10 flex justify-center lg:justify-start lg:hidden">
           <button
             className="bg-secondary hover:bg-red-800 text-white mt-6 font-semibold py-3.5 px-6 rounded shadow font-body"
             onClick={() => Router.push("/resources")}
-            >
+          >
             Discover 100+ resources
           </button>
         </div>
@@ -105,7 +105,9 @@ export default function Home({ resources }) {
           </p>
           <div
             className="flex flex-row flex-shrink-0 justify-center mt-8 cursor-pointer"
-            onClick={() => window.open("https://www.buymeacoffee.com/fullstackdre")}
+            onClick={() =>
+              window.open("https://www.buymeacoffee.com/fullstackdre")
+            }
           >
             <Image
               height="57.5px"
@@ -116,15 +118,20 @@ export default function Home({ resources }) {
           </div>
         </div>
       </div>
-      <div className="w-full h-96 bg-email bg-no-repeat bg-cover flex justify-start items-center">
-        <div className="bg-primary w-full h-80 my-8 flex z-0 justify-center items-center lg:w-1/2 lg:relative">
+      <div className="w-full lg:flex lg:flex-row-reverse">
+        <div
+          className="relative z-0 w-full lg:w-1/2 lg:h-80 h-44 flex self-center"
+        >
+          <Image layout={"fill"} src="/wallpaper.png" />
+        </div>
+        <div className="bg-primary w-full py-8 px-8 flex justify-center items-center z-10 lg:w-1/2 lg:relative">
           <div className="flex-column justify-center">
             <p className="text-2xl font-semibold font-heading pl-1">
               Subscribe to our newsletter!
             </p>
             <p className="text-md font-body pt-3 pb-5 leading-6 pl-1">
-              Get updated for our brand-new D&D resource releases, <br />
-              and community updates right into your e-mail inbox
+              Get updated for our brand-new D&D resource releases, and community
+              updates right into your e-mail inbox
             </p>
             <div className="w-full">
               <form

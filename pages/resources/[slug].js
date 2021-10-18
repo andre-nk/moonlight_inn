@@ -46,7 +46,7 @@ export const getStaticProps = async ({ params }) => {
 
 export default function ResourcesDetails({ resources }) {
   if (!resources) return <CustomLoader />;
-
+  console.log(resources.fields);
   return (
     <div>
       <Head>
